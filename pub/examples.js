@@ -1,6 +1,5 @@
 /* JS Library usage examples */
 ("use strict");
-// Circle Generator
 const tree = new FamilyTreeMaker("Bezos");
 tree.makeMember(1, "Bob");
 tree.makeMember(1, "Tom");
@@ -32,9 +31,11 @@ tree.specifyGender(2, "M");
 tree.addBirthday(6, "12/25/2000");
 
 const tree2 = new FamilyTreeMaker("Gates");
-tree2.makeMember(4, "Jerry");
+tree2.makeMember(3, "Jerry");
 tree2.makeMember(2, "Ethan");
 tree2.makeMember(2, "Catherine");
 tree2.makeMember(1, "Emily");
 tree2.makeMember(3, "Cathy");
+tree2.makeMember(3, "Bill");
+tree2.makeMember(3, "Linda");
 tree2.drawTree();
