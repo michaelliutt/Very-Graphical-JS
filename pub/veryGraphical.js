@@ -217,6 +217,11 @@ FamilyTreeMaker.prototype = {
 
     desc.appendChild(document.createTextNode("Died on:" + member.diedOn));
     desc.appendChild(document.createElement("br"));
+
+    desc.appendChild(
+      document.createTextNode("Id in the family: " + member.family_id)
+    );
+    desc.appendChild(document.createElement("br"));
     tree.appendChild(desc);
 
     console.log(desc.id);
