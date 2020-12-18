@@ -149,7 +149,6 @@ FamilyTreeMaker.prototype = {
     const member = this.findMemberByElement(member_element);
     // if it is not already highlighted
     this.highlightDirectRelative(member.family_id);
-    console.log(member);
     member.ancestors.forEach((relative) => {
       this.highlightDirectRelative(relative.family_id);
     });
@@ -297,9 +296,12 @@ FamilyTreeMaker.prototype = {
     const member = this.findMemberElement(id);
     member.style.backgroundColor = color;
   },
-  drawTree: function () {
-    const body = $("body");
+
+  // draw the tree inside element with given id
+  drawTree: function (element_id) {
+    const body = document.getElementById(element_id);
     const tree = document.createElement("div");
+    tree.className = "tree";
     tree.style.outline = "2px solid grey";
     tree.style.padding = "50px";
     tree.style.margin = "10px";

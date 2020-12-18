@@ -19,7 +19,7 @@ function tree_example1() {
   tree.makeMember(2, "Jason");
   tree.makeMember(1, "Jackson");
   tree.makeMember(1, "Mary");
-  tree.drawTree();
+  tree.drawTree("body");
   tree.addAncestor(6, 5);
   tree.addAncestor(6, 4);
   tree.addAncestor(6, 7);
@@ -48,7 +48,7 @@ function tree_example2() {
   tree2.makeMember(1, "Cathy");
   tree2.makeMember(1, "Bill");
   tree2.makeMember(1, "Linda");
-  tree2.drawTree();
+  tree2.drawTree("body");
   tree2.changeBackground("./images/mountain.jpg");
 }
 

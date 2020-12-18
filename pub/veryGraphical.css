@@ -1,11 +1,11 @@
 div {
-  text-align: center;
   vertical-align: top;
   width: "100vw";
 }
-body {
+.tree {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  text-align: center;
 }
 .gen_five {
   width: 280px;
