@@ -12,6 +12,8 @@ function FamilyMember(generation, name, family_name, family_id) {
   this.diedOn = "Currently Alive";
   this.diedOn_display = false;
   this.element = null;
+  this.descendents = [];
+  this.ancestors = [];
 }
 
 FamilyMember.prototype = {
@@ -47,6 +49,7 @@ function FamilyTreeMaker(family_name) {
   this.members = [];
   this.youngest_generation = 0;
   this.members_by_generation = {};
+  this.highlighted = false; // if a part of the tree is currently being highlighted
 }
 
 FamilyTreeMaker.prototype = {
@@ -60,6 +63,9 @@ FamilyTreeMaker.prototype = {
     const member_element = member.makeMember();
     member_element.addEventListener("click", () => {
       this.displayFullDesc(member);
+    });
+    member_element.addEventListener("click", () => {
+      this.highlightDirectRelatives(member.family_id);
     });
     if (generation > this.youngest_generation) {
       this.youngest_generation = generation;
@@ -91,11 +97,66 @@ FamilyTreeMaker.prototype = {
 
   // Mark the family member with given id as deceased
   markDeceased: function (id) {
-    const member = this.findMemberElement(id);
-    member.style.outline = "2px solid red";
-    member.style.borderRadius = "0%";
+    const member_element = this.findMemberElement(id);
+    member_element.style.outline = "2px solid red";
+    member_element.style.borderRadius = "0%";
   },
 
+  // Mark the family member with given id as ancestor
+  addAncestor: function (id, parent_id) {
+    const member_element = this.findMemberElement(id);
+    const member = this.findMemberByElement(member_element);
+    const parent_element = this.findMemberElement(parent_id);
+    const parent = this.findMemberByElement(parent_element);
+    console.log(parent);
+    member.ancestors.push(parent);
+    parent.descendents.push(member);
+  },
+
+  // Mark the family member with given id as descendent
+  addDescendent: function (id, parent_id) {
+    const member_element = this.findMemberElement(id);
+    const member = this.findMemberByElement(member_element);
+    const parent_element = this.findMemberElement(parent_id);
+    const parent = this.findMemberByElement(parent_element);
+    console.log(parent);
+    member.descendents.push(parent);
+    parent.ancestors.push(member);
+  },
+
+  // Highlight this member
+  highlightDirectRelative: function (id) {
+    const member_element = this.findMemberElement(id);
+    // if it is not already highlighted
+    if (!this.highlighted) {
+      setTimeout(() => {
+        this.highlighted = true;
+      }, 50);
+      const curr = member_element.style.outline;
+      member_element.style.outline = "6px solid green";
+      member_element.style.borderRadius = "0%";
+      setTimeout(() => {
+        member_element.style.outline = curr;
+        member_element.style.borderRadius = "25px";
+        this.highlighted = false;
+      }, 3000);
+    }
+  },
+
+  // Highlight direct relatives of this member
+  highlightDirectRelatives: function (id) {
+    const member_element = this.findMemberElement(id);
+    const member = this.findMemberByElement(member_element);
+    // if it is not already highlighted
+    this.highlightDirectRelative(member.family_id);
+    console.log(member);
+    member.ancestors.forEach((relative) => {
+      this.highlightDirectRelative(relative.family_id);
+    });
+    member.descendents.forEach((relative) => {
+      this.highlightDirectRelative(relative.family_id);
+    });
+  },
   // Specify gender of the family member with given id
   specifyGender: function (id, gender) {
     const member_element = this.findMemberElement(id);
@@ -191,6 +252,7 @@ FamilyTreeMaker.prototype = {
 
     // if there is already a description present
     if (
+      // length for each member, yongest_gen for br, 1 for existing desc
       tree.childElementCount >=
       this.members.length + this.youngest_generation + 1
     ) {
@@ -223,10 +285,14 @@ FamilyTreeMaker.prototype = {
     );
     desc.appendChild(document.createElement("br"));
     tree.appendChild(desc);
-
-    console.log(desc.id);
   },
 
+  // Change background of tree to image at given path
+  changeBackground: function (url) {
+    const tree = document.getElementById(this.family_name + "tree");
+    tree.style.backgroundImage = ` url(${url})`;
+    tree.style.backgroundSize = " 100% 100%";
+  },
   changeColor: function (id, color) {
     const member = this.findMemberElement(id);
     member.style.backgroundColor = color;
@@ -236,6 +302,9 @@ FamilyTreeMaker.prototype = {
     const tree = document.createElement("div");
     tree.style.outline = "2px solid grey";
     tree.style.padding = "50px";
+    tree.style.margin = "10px";
+    tree.style.width = `${this.members_by_generation["1"].length * 200}px`;
+    tree.style.height = `${this.youngest_generation * 130 + 250}px`;
     tree.id = this.family_name + "tree";
     for (let gen = 1; gen < this.youngest_generation + 1; gen++) {
       for (let i = 0; i < this.members_by_generation[gen].length; i++) {
