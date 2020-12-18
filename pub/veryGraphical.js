@@ -307,6 +307,7 @@ FamilyTreeMaker.prototype = {
     tree.style.margin = "10px";
     tree.style.width = `${this.members_by_generation["1"].length * 200}px`;
     tree.style.height = `${this.youngest_generation * 130 + 250}px`;
+    tree.style.backgroundColor = "white";
     tree.id = this.family_name + "tree";
     for (let gen = 1; gen < this.youngest_generation + 1; gen++) {
       for (let i = 0; i < this.members_by_generation[gen].length; i++) {
