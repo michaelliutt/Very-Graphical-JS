@@ -100,6 +100,7 @@ FamilyTreeMaker.prototype = {
     const member_element = this.findMemberElement(id);
     member_element.style.outline = "2px solid red";
     member_element.style.borderRadius = "0%";
+    this.changeColor(id, "white");
   },
 
   // Mark the family member with given id as ancestor
@@ -305,6 +306,7 @@ FamilyTreeMaker.prototype = {
     tree.style.outline = "2px solid grey";
     tree.style.padding = "50px";
     tree.style.margin = "10px";
+    tree.style.marginBottom = "0px";
     tree.style.width = `${this.members_by_generation["1"].length * 200}px`;
     tree.style.height = `${this.youngest_generation * 130 + 250}px`;
     tree.style.backgroundColor = "white";

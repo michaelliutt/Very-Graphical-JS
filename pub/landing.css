@@ -8,9 +8,10 @@ div {
   height: 70px;
 }
 #examples {
-  background-image: url(images/landing.jpg);
+  background-image: url(images/index.jpg);
   background-size: cover;
   color: "white";
+  background-repeat: repeat-y;
 }
 
 .example_text {
@@ -18,4 +19,9 @@ div {
   padding-left: 20px;
   padding-top: 20px;
   font-weight: 600;
+}
+a:visited {
+  color: royalblue;
+  background-color: transparent;
+  text-decoration: none;
 }
