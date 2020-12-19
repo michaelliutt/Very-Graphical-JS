@@ -4,6 +4,10 @@
 
 https://very-graphical-library.herokuapp.com/
 
+# Documentation URL
+
+https://very-graphical-library.herokuapp.com/api_doc.html
+
 # Getting Started
 
 ## Installing the library
@@ -11,7 +15,7 @@ https://very-graphical-library.herokuapp.com/
 -> Before the library is published on NPM, developers need to download the library JS file and save in their project folder
 -> This library will soon be available to download on <a href="https://github.com/michaelliutt/Very-Graphical-JS"> github
 
-### Adding this library to HTML
+## Adding this library to HTML
 
 -> Include provided css file named "veryGraphical.css" wrapped in "link" tag
 -> Include the library JS file named "veryGraphical.js" wrapped in "script" tag
