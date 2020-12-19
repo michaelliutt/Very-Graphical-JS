@@ -41,6 +41,21 @@ FamilyMember.prototype = {
     this.element = element;
     return element;
   },
+  get_id: function () {
+    return this.family_id;
+  },
+  get_family_name: function () {
+    return this.family_name;
+  },
+  get_element: function () {
+    return this.element;
+  },
+  get_ancestors: function () {
+    return this.ancestors;
+  },
+  get_descendents: function () {
+    return this.descendents;
+  },
 };
 
 function FamilyTreeMaker(family_name) {
@@ -93,6 +108,19 @@ FamilyTreeMaker.prototype = {
       }
     }
     return member;
+  },
+
+  get_name: function () {
+    return this.family_name;
+  },
+  get_pop: function () {
+    return this.population;
+  },
+  get_members: function () {
+    return this.members;
+  },
+  get_members_by_gen: function (gen) {
+    return this.members_by_generation[gen];
   },
 
   // Mark the family member with given id as deceased

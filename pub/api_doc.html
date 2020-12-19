@@ -154,7 +154,7 @@
                 this.name = name;                   // First name by default
                 this.last_name = null;              // If different from family name
                 this.family_name = family_name;     // family name
-                this.family_id = family_id;         // index of this person in the family
+                this.family_id = family_id;         // index of this person in the family by order of entrance
                 this.age = null;                    // Can be specified
                 this.age_display = false;           // If age info is being displayed
                 this.generation = generation;       // Member's generation
@@ -182,6 +182,22 @@
               }
 
         </textarea>
+        <h2>Utility Methods</h2>
+        <h4> findMemberElement(id)</h4>
+        <p> Params: [family member id]</p>
+        <p> Return: div element representing the member</p>
+
+        <h4> findMemberByElement(element)</h4>
+        <p> Params: [div element representing family member]</p>
+        <p> Return: FamilyMember object</p>
+
+        <h4> highlightDirectRelative(id)</h4>
+        <p> Params: [family member id]</p>
+        <p> Effect: indicate on tree this member</p>
+
+        <h4> highlightDirectRelatives(id)</h4>
+        <p> Params: [family member id]</p>
+        <p> Return: indicate ancestors and descendents of this member on the tree</p>
 
     </div>
  </body>
