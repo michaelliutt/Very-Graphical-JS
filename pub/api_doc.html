@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>JS Libraries</title>
+
+    <link rel="stylesheet" type="text/css" href="api_doc.css">
+
+    
+ </head>
+ <body style = "margin: 0; font-family: Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif;" >
+    <div id="banner"><h2> Very Graphical JS</h2> </div>
+    <!-- <h3 style="text-align: center;  width: 100%; margin: 0;"> Welcome to Very Graphical! -- Don't worry, it's not that graphical (We draw family trees)</h3> -->
+    <h3 style="padding: 10px; background-color: peachpuff; margin: 0"> API Documentation ---> <a href="index.html"> View individual functionality usage examples </a></h3>
+    <div id = "doc">
+
+        <h2 class="doc_text"> Getting Started </h2>
+
+        <h4>Installing the library</h4>
+        <p> -> Before the library is published on NPM, developers need to download the library JS file and save in their project folder</p>
+        <p> -> This library will soon be available to download on <a href="https://github.com/michaelliutt/Very-Graphical-JS"> github </a> </p>
+
+        <h4>Adding this library to HTML</h4>
+        <p> -> Include provided css file named "veryGraphical.css" wrapped in "link" tag</p>
+        <p> -> Include the library JS file named "veryGraphical.js" wrapped in "script" tag</p>
+
+        <textarea disabled> 
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+
+            <link rel="stylesheet" type="text/css" href="veryGraphical.css">
+            <script defer type="text/javascript" src='veryGraphical.js'></script>
+            
+        </head>
+        </html> </textarea>
+
+        <h2>Main functionalities snippets</h2>
+        <p> **Note: The order of having methods called matters. Please read drawTree section for detailed explanation.</p>
+        <h4> Constructor</h4>
+
+        <textarea disabled> 
+
+            const example_tree = new FamilyTreeMaker("family_name");
+
+            
+            params: [family name in string format]
+            return: a FamilyTreeMaker object
+
+        </textarea>
+
+        <h4> makeMember() - Adding new member to the family</h4>
+
+        <textarea disabled> 
+
+            example_tree.makeMember(1, "Catherine");
+
+            
+            params: [generation of the member to add], [name of the member to add]
+
+        </textarea>
+
+        <h4> addAncestor() / addDescendent() - Adding ancestor/descends relationship</h4>
+
+        <textarea disabled> 
+
+            example_tree.addAncestor(1, 2);
+            example_tree.addDescendent(1, 3);
+
+            
+            params: [family member id], [family member id of ancestor/descendent being added]
+
+        </textarea>
+
+        <h4> specifyGender() - Specify the gender of given member</h4>
+
+        <textarea disabled> 
+
+            example_tree.specifyGender(1, "male");
+
+            
+            params: [family member id], [gender] // M, F, male, or female
+
+        </textarea>
+
+        <h4> addBirthday() - Display birthday info</h4>
+        <h4> addAge() - Display age info</h4>
+        <h4> addGeneration() - Display generation info</h4>
+
+        <textarea disabled> 
+
+            example_tree.addBirthday(1, "01/01/1900");
+            params: [family member id], [birthday]
+
+            example_tree.addAge(1, 20);
+            params: [family member id], [age]
+
+            example_tree.addGeneration(1);
+            params: [family member id],
+
+        </textarea>
+
+        <h4> markDeceased() - Mark member as deceased and indicate on tree</h4>
+        <h4> addDeathday() - Add and display death date</h4>
+
+        <textarea disabled> 
+
+            example_tree.markDeceased(2);
+            params: [family member id]
+
+            example_tree.addDeathday(2, "01/01/2020");
+            params: [family member id], [death date]
+
+
+        </textarea>
+
+        <h4> changeBackground() - Change background of family tree </h4>
+
+        <textarea disabled> 
+
+            example_tree.changeBackground("./images/mountain.jpg");
+
+
+            params: [path to desire background photo]
+
+
+        </textarea>
+
+        <h4> drawTree() - Display family tree with given members in HTML</h4>
+        <p> **Note: Call this function after adding all wanted members, and before other tree modifying function</p>
+
+        <textarea disabled> 
+
+            example_tree.makeMember(1, "Catherine");
+            example_tree.makeMember(2, "Tom");
+            example_tree.makeMember(3, "Jerry");
+            ... (making more members)
+
+            example_tree.drawTree("div1");
+
+            params: [id of the container element]
+
+        </textarea>
+
+        <h2>Object model snippets</h2>
+        <h4> FamilyMember - represents a member in the family</h4>
+        <textarea style="height: 400px; width: 800px;" disabled> 
+
+            function FamilyMember(generation, name, family_name, family_id) {
+                this.name = name;                   // First name by default
+                this.last_name = null;              // If different from family name
+                this.family_name = family_name;     // family name
+                this.family_id = family_id;         // index of this person in the family
+                this.age = null;                    // Can be specified
+                this.age_display = false;           // If age info is being displayed
+                this.generation = generation;       // Member's generation
+                this.generation_display = false;    // If generation info is being displayed
+                this.birthday = null;               // Member's birthday
+                this.birthday_display = false;      // If birthday info is being displayed
+                this.diedOn = "Currently Alive";    // Member's death date
+                this.diedOn_display = false;        // If death date info is being displayed
+                this.element = null;                // The div element representing this member
+                this.descendents = [];              // The member's descendents
+                this.ancestors = [];                // The member's ancestors
+              }
+        </textarea>
+
+        <h4> FamilyTreeMaker - represents an entire family</h4>
+        <textarea style="height: 200px; width: 800px;" disabled> 
+
+            function FamilyTreeMaker(family_name) {
+                this.family_name = family_name;     // Family name
+                this.population = 0;                // Number of members
+                this.members = [];                  // Array of FamilyMember objects
+                this.youngest_generation = 0;       // The youngest generation in the family
+                this.members_by_generation = {};    // key is generation, value is array of FamilyMembers
+                this.highlighted = false;           // if a part is currently being highlighted
+              }
+
+        </textarea>
+
+    </div>
+ </body>
+</html>

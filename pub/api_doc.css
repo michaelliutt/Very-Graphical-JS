@@ -1,0 +1,25 @@
+#banner {
+  background-color: azure;
+  padding: 20px;
+  height: 70px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+#doc {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin: 20px;
+}
+
+h4 {
+  margin: 20px;
+}
+p {
+  margin-left: 40px;
+}
+
+textarea {
+  margin-left: 40px;
+  height: 200px;
+  width: 750px;
+}
